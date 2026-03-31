@@ -17,10 +17,11 @@ namespace ADO
 			Console.WriteLine(connection_string);
 			connection = new SqlConnection(connection_string);
 			
-			string cmd = "SELECT * FROM Directors";
+			string cmd = "SELECT last_name,first_name FROM Directors";
 			Select(cmd);
 			Console.WriteLine($"Количество записей: {Scalar("SELECT COUNT(*) FROM Directors")}");
-			Select("SELECT * FROM Movies");
+			Select("title, release_date, last_name, first_name", "Movies,Directors", "director=director_id");
+			//Select("SELECT Title,release_date,first_name,last_name FROM Movies,Directors WHERE director=director_id");
 		}
 
 		static void Select(string cmd)
@@ -28,15 +29,46 @@ namespace ADO
 			SqlCommand command = new SqlCommand(cmd, connection);
 			connection.Open();
 			SqlDataReader reader = command.ExecuteReader();
-			for (int i = 0; i < reader.FieldCount;i++)
-				Console.Write($"{reader.GetName(i)}\t");
+
+			//Определяем максимальный размер данных в каждом поле таблицы:
+			int[] string_sizes = new int[reader.FieldCount];//Этот массив хранит максимальные размеры строк для каждого поля
+			int interval = 11;
+			//вычисляем максимальные размеры строк
+			for(int i = 0; i < reader.FieldCount;i++)
+				if (reader.GetName(i).ToString().Length > string_sizes[i])
+					string_sizes[i] = reader.GetName(i).ToString().Length + interval;
+			while(reader.Read())
+			{
+				for(int i = 0; i < reader.FieldCount; i++)
+				{
+					if (reader[i].ToString().Length > string_sizes[i]) string_sizes[i] = reader[i].ToString().Length + interval;
+				}
+			}
+			reader.Close();
+			//Заново выполняем запрос, и выводим результаты запроса:
+			reader = command.ExecuteReader();
+			for (int i = 0; i < reader.FieldCount; i++)
+			{
+				Console.Write($"{reader.GetName(i).PadRight(string_sizes[i])}");
+				if(reader.GetName(i).ToString().Length > string_sizes[i]) string_sizes[i] = reader.GetName(i).ToString().Length + interval;
+			}
 			Console.WriteLine();
+			for (int i = 0; i < string_sizes.Sum(); i++) Console.Write("-");Console.WriteLine();
 			while (reader.Read())
 			{
-				Console.WriteLine($"{reader[0]}\t{reader[1]}\t{reader[2]}");
+				//Console.WriteLine($"{reader[0]}\t{reader[1]}\t{reader[2]}");
+				for (int i = 0; i < reader.FieldCount; i++)
+					Console.Write(reader[i].ToString().PadRight(string_sizes[i]));
+				Console.WriteLine();
 			}
 			reader.Close();
 			connection.Close();
+		}
+		static void Select(string fields, string tables, string condition = "")
+		{
+			string cmd = $"SELECT {fields} FROM {tables}";
+			if (condition != "") cmd += $" WHERE {condition}";
+			Select(cmd);
 		}
 		static object Scalar(string cmd)
 		{
