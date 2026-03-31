@@ -18,17 +18,19 @@ namespace ADO
 			connection = new SqlConnection(connection_string);
 			
 			string cmd = "SELECT * FROM Directors";
-			Select(cmd);
-			Console.WriteLine($"Количество записей: {Scalar("SELECT COUNT(*) FROM Directors")}");
-			Select("SELECT * FROM Movies");
+			Methods.Select(cmd, connection);
+			Console.WriteLine($"Количество записей: {Methods.Scalar("SELECT COUNT(*) FROM Directors", connection)}");
+			Methods.Select("SELECT * FROM Movies", connection);
 		}
-
-		static void Select(string cmd)
+	}
+	internal class Methods
+	{
+		public static void Select(string cmd, SqlConnection connection)
 		{
 			SqlCommand command = new SqlCommand(cmd, connection);
 			connection.Open();
 			SqlDataReader reader = command.ExecuteReader();
-			for (int i = 0; i < reader.FieldCount;i++)
+			for (int i = 0; i < reader.FieldCount; i++)
 				Console.Write($"{reader.GetName(i)}\t");
 			Console.WriteLine();
 			while (reader.Read())
@@ -38,12 +40,12 @@ namespace ADO
 			reader.Close();
 			connection.Close();
 		}
-		static object Scalar(string cmd)
+		public static object Scalar(string cmd, SqlConnection connection)
 		{
 			object value = null;
 			SqlCommand command = new SqlCommand(cmd, connection);
 			connection.Open();
-			value = command.ExecuteScalar();	
+			value = command.ExecuteScalar();
 			connection.Close();
 			return value;
 		}
