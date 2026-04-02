@@ -71,5 +71,12 @@ namespace ADO
 			connection.Close();
 			return value;
 		}
+		public void Insert(string cmd)
+		{
+			SqlCommand command = new SqlCommand(cmd, connection);
+			connection.Open();
+			command.ExecuteNonQuery();
+			connection.Close();
+		}
 	}
 }
