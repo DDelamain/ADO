@@ -20,8 +20,8 @@ namespace ADO
 			Console.WriteLine(connector.GetPrimaryKeyColumnName("Movies"));
 			Console.WriteLine(connector.GetNextPrimaryKey("Movies"));
 			//connector.Insert($"Insert Directors(director_id,first_name,last_name)VALUES({connector.GetNextPrimaryKey("Directors")},N'Peter',N'Jackson')");
-			string first_name = "Luc";
-			string last_name = "Besson";
+			string first_name = "Christopher";
+			string last_name = "Nolan";
 			connector.Insert($@"IF NOT EXISTS (
 				SELECT * FROM Directors 
 				WHERE first_name = N'{first_name}' AND last_name = N'{last_name}'
