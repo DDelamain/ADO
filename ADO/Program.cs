@@ -19,8 +19,14 @@ namespace ADO
 
 			Console.WriteLine(connector.GetPrimaryKeyColumnName("Movies"));
 			Console.WriteLine(connector.GetNextPrimaryKey("Movies"));
-			connector.Insert($"Insert Directors(director_id,first_name,last_name)VALUES({connector.GetNextPrimaryKey("Directors")},N'Peter',N'Jackson')");
-
+			//connector.Insert($"Insert Directors(director_id,first_name,last_name)VALUES({connector.GetNextPrimaryKey("Directors")},N'Peter',N'Jackson')");
+			string first_name = "Luc";
+			string last_name = "Besson";
+			connector.Insert($@"IF NOT EXISTS (
+				SELECT * FROM Directors 
+				WHERE first_name = N'{first_name}' AND last_name = N'{last_name}'
+			)
+				INSERT Directors(director_id,first_name,last_name) VALUES({connector.GetNextPrimaryKey("Directors")},N'{first_name}',N'{last_name}')");
 			connector.Select("SELECT * FROM Directors");
 			connector.Select("movie_id, title, first_name,last_name", "Movies,Directors", "director=director_id");
 			//Console.WriteLine(connection_string);
