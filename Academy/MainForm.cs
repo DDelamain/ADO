@@ -50,7 +50,7 @@ namespace Academy
 		{
 			int i = (sender as TabControl).SelectedIndex;   //Получаем номер выбранной вкладки
 															//tables[i].DataSource = connector.Load(queries[i].ToString());
-			tables[i].DataSource = connector.Select(queries[i].ToString());
+			tables[i].DataSource = connector.Load(queries[i].ToString());
 			//tables[i].DataSource = connector.Select("*", tabControl.SelectedTab.Text);
 			toolStripStatusLabel.Text = $"Количество записей: {tables[i].RowCount - 1}";
 		}
