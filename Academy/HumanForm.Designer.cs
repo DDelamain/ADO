@@ -40,12 +40,12 @@
 			this.textBoxEmail = new System.Windows.Forms.TextBox();
 			this.textBoxPhone = new System.Windows.Forms.TextBox();
 			this.dtpBirthDate = new System.Windows.Forms.DateTimePicker();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.pictureBoxPhoto = new System.Windows.Forms.PictureBox();
 			this.buttonBrowse = new System.Windows.Forms.Button();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.labelID = new System.Windows.Forms.Label();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelLastName
@@ -169,14 +169,14 @@
 			this.dtpBirthDate.Size = new System.Drawing.Size(310, 31);
 			this.dtpBirthDate.TabIndex = 11;
 			// 
-			// pictureBox1
+			// pictureBoxPhoto
 			// 
-			this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pictureBox1.Location = new System.Drawing.Point(508, 13);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(188, 211);
-			this.pictureBox1.TabIndex = 12;
-			this.pictureBox1.TabStop = false;
+			this.pictureBoxPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pictureBoxPhoto.Location = new System.Drawing.Point(508, 13);
+			this.pictureBoxPhoto.Name = "pictureBoxPhoto";
+			this.pictureBoxPhoto.Size = new System.Drawing.Size(188, 211);
+			this.pictureBoxPhoto.TabIndex = 12;
+			this.pictureBoxPhoto.TabStop = false;
 			// 
 			// buttonBrowse
 			// 
@@ -198,6 +198,7 @@
 			this.buttonOK.TabIndex = 14;
 			this.buttonOK.Text = "OK";
 			this.buttonOK.UseVisualStyleBackColor = true;
+			this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
 			// 
 			// buttonCancel
 			// 
@@ -228,7 +229,7 @@
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOK);
 			this.Controls.Add(this.buttonBrowse);
-			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.pictureBoxPhoto);
 			this.Controls.Add(this.dtpBirthDate);
 			this.Controls.Add(this.textBoxPhone);
 			this.Controls.Add(this.textBoxEmail);
@@ -246,7 +247,7 @@
 			this.MinimizeBox = false;
 			this.Name = "HumanForm";
 			this.Text = "HumanForm";
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -266,7 +267,7 @@
 		private System.Windows.Forms.TextBox textBoxEmail;
 		private System.Windows.Forms.TextBox textBoxPhone;
 		private System.Windows.Forms.DateTimePicker dtpBirthDate;
-		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.PictureBox pictureBoxPhoto;
 		private System.Windows.Forms.Button buttonBrowse;
 		private System.Windows.Forms.Button buttonOK;
 		private System.Windows.Forms.Button buttonCancel;
