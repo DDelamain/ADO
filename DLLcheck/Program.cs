@@ -17,6 +17,8 @@ namespace DLLcheck
 				(
 				ConfigurationManager.ConnectionStrings["Movies_PV_522"].ConnectionString
 				);
+			connector.Update("UPDATE Directors SET last_name=N'Tagtgren' WHERE director_id=8");
+			connector.Update("Directors", "first_name,last_name", "Michel , Jackson", "director_id=9");
 			connector.Select("*", "Directors");
 			connector.Select("title,release_date,first_name,last_name", "Movies,Directors", "director=director_id");
 			Connector connectorAcademy = new Connector
