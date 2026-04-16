@@ -25,15 +25,25 @@ namespace Academy.Models
 			string email, string phone, Image photo
 			)
 			{
-				this.id = id;
-				this.last_name = last_name;
-				this.first_name = first_name;
-				this.middle_name = middle_name;
-				this.birth_date = birth_date;
-				this.email = email;
-				this.phone = phone;
-				this.photo = photo;
+				this.id				= id;
+				this.last_name		= last_name;
+				this.first_name		= first_name;
+				this.middle_name	= middle_name;
+				this.birth_date		= birth_date;
+				this.email			= email;
+				this.phone			= phone;
+				this.photo			= photo;
 			}
+		public Human(object[] values)
+		{
+			id = Convert.ToInt32(values[0]);
+			last_name	= values[1].ToString();
+			first_name	= values[2].ToString();
+			middle_name = values[3].ToString();
+			birth_date	= values[4].ToString();
+			email		= values[5].ToString();
+			phone		= values[6].ToString();
+		}
 		public Human(Human other)
 			{
 				this.id = other.id;
