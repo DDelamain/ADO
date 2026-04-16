@@ -187,6 +187,7 @@
 			this.buttonBrowse.TabIndex = 13;
 			this.buttonBrowse.Text = "Обзор";
 			this.buttonBrowse.UseVisualStyleBackColor = true;
+			this.buttonBrowse.MouseClick += new System.Windows.Forms.MouseEventHandler(this.buttonBrowse_MouseClick);
 			// 
 			// buttonOK
 			// 

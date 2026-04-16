@@ -73,6 +73,13 @@ namespace Academy
 		{
 			StudentForm student = new StudentForm();
 			student.ShowDialog();
+
+			tabControl_SelectedIndexChanged(tabControl, null);
 		}
+
+		//private void dgvStudents_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		//{
+
+		//}
 	}
 }
