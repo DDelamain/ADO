@@ -171,6 +171,14 @@ AND		CONSTRAINT_TYPE=N'PRIMARY KEY'
 			}
 			return value;
 		}
+		public void UploadPhoto(byte[] image, int id, string field, string table)
+		{
+			string cmd = $"UPDATE {table} SET {field}=@image WHERE {GetPrimaryKeyColumnName(table)}={id}";
+			SqlCommand command = new SqlCommand(cmd, connection);
+			command.Parameters.Add("@image", SqlDbType.VarBinary).Value = image;
+			connection.Open();
+			command.ExecuteNonQuery();
+			connection.Close();
+		}
 	}
-
 }
